@@ -17,6 +17,7 @@ public class MainTest {
 
 		System.out.println("beanA:"+beanServiceA);
 		System.out.println("beanB:"+beanServiceB);
+		System.out.println("appliaction:"+beanServiceA.getApplicationContext());
 	}
 
 }
