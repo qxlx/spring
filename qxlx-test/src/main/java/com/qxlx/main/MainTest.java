@@ -12,12 +12,15 @@ public class MainTest {
 
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("beans.xml");
-		ServiceA beanServiceA = classPathXmlApplicationContext.getBean(ServiceA.class);
-		ServiceB beanServiceB = classPathXmlApplicationContext.getBean(ServiceB.class);
+//		ServiceA beanServiceA = classPathXmlApplicationContext.getBean(ServiceA.class);
+//		ServiceB beanServiceB = classPathXmlApplicationContext.getBean(ServiceB.class);
+//
+//		System.out.println("beanA:"+beanServiceA);
+//		System.out.println("beanB:"+beanServiceB);
+//		System.out.println("appliaction:"+beanServiceA.getApplicationContext());
 
-		System.out.println("beanA:"+beanServiceA);
-		System.out.println("beanB:"+beanServiceB);
-		System.out.println("appliaction:"+beanServiceA.getApplicationContext());
+		Person person = classPathXmlApplicationContext.getBean(Person.class);
+		System.out.println("person:"+person);
 	}
 
 }
