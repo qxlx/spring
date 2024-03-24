@@ -39,6 +39,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.ResolvableType;
+import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -128,6 +130,7 @@ public class ScopingTests {
 		Object newBean3 = ctx.getBean(beanName);
 		assertThat(newBean3).as(message).isNotSameAs(newBean2);
 	}
+
 
 	@Test
 	public void testSameScopeOnDifferentBeans() throws Exception {

@@ -1,0 +1,23 @@
+1.spring 为什么不采用new的方式，而是通过反射创建。
+  灵活，运行时创建  Class类信息可以获取
+
+2.实例化 vs 初始化
+  实例话-堆中开辟一块空间，对象属性值都是默认值
+  初始化：给属性设置值，1.填充属性 2.执行初始化方法 init-method 3.aop
+
+3.aware接口到底是干什么的
+    当spring容器创建的bean对象在进行具体操作的时候，如果需要容器的其他对象，此时可以将对象实现aware接口。
+    来满足当前需要
+
+4.springbean包含两个
+    普通对象：我们自定义需要的对象
+    容器对象：内置对象Spring需要的对象
+
+5.重要的接口
+    beanfactory、Aware、BeanDefinition、BeanDefinitionReader、BeanFactoryPostProcessor
+    BeanPostProcessor
+    Environment: 环境 -standardEnviroment
+
+6.FactoryBean vs beanFactory 区别
+    作用都是用来创建对象的，beanFactory必须遵循完整的创建过程，spring来管理控制
+    factoryBean只需要调用getObject()返回具体的对象，整个对象的创建过程用户自定义完成。更加灵活

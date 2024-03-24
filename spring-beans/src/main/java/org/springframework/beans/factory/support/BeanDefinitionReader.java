@@ -37,6 +37,8 @@ import org.springframework.lang.Nullable;
  * @since 1.1
  * @see org.springframework.core.io.Resource
  */
+// 抽象类 定义规范 方便拓展
+
 public interface BeanDefinitionReader {
 
 	/**

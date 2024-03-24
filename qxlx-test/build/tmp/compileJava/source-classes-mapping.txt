@@ -1,14 +1,24 @@
-com/qxlx/main/springbean/circulardend/ServiceA.java
- com.qxlx.main.springbean.circulardend.ServiceA
-com/qxlx/main/springbean/circulardend/constructirijection/MainTest.java
- com.qxlx.main.springbean.circulardend.constructirijection.MainTest
-com/qxlx/main/springbean/circulardend/constructirijection/B.java
- com.qxlx.main.springbean.circulardend.constructirijection.B
+com/qxlx/main/processor/factory/MyBeanFactoryPostProcessor.java
+ com.qxlx.main.processor.factory.MyBeanFactoryPostProcessor
+com/qxlx/main/domain/Person.java
+ com.qxlx.main.domain.Person
 com/qxlx/main/springbean/circulardend/constructirijection/A.java
  com.qxlx.main.springbean.circulardend.constructirijection.A
 com/qxlx/main/springbean/circulardend/ServiceB.java
  com.qxlx.main.springbean.circulardend.ServiceB
+com/qxlx/main/aop/AspectJTest.java
+ com.qxlx.main.aop.AspectJTest
+com/qxlx/main/springbean/circulardend/constructirijection/B.java
+ com.qxlx.main.springbean.circulardend.constructirijection.B
+com/qxlx/main/factory/factorybean/A.java
+ com.qxlx.main.factory.factorybean.A
+com/qxlx/main/springbean/circulardend/ServiceA.java
+ com.qxlx.main.springbean.circulardend.ServiceA
+com/qxlx/main/aop/AopOpenConfig.java
+ com.qxlx.main.aop.AopOpenConfig
+com/qxlx/main/factory/factorybean/AFactoryBean.java
+ com.qxlx.main.factory.factorybean.AFactoryBean
 com/qxlx/main/MainTest.java
  com.qxlx.main.MainTest
-com/qxlx/main/Person.java
- com.qxlx.main.Person
+com/qxlx/main/springbean/circulardend/constructirijection/MainTest.java
+ com.qxlx.main.springbean.circulardend.constructirijection.MainTest

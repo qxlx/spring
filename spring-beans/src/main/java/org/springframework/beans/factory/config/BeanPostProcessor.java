@@ -71,9 +71,15 @@ public interface BeanPostProcessor {
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet
 	 */
 	@Nullable
+	// 后置处理器
 	default Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}
+
+    // AOP
+	// BeforeInitialization
+	// init-method
+	// AfterInitialization
 
 	/**
 	 * Apply this {@code BeanPostProcessor} to the given new bean instance <i>after</i> any bean
@@ -97,6 +103,7 @@ public interface BeanPostProcessor {
 	 * @see org.springframework.beans.factory.FactoryBean
 	 */
 	@Nullable
+	// 前置处理器
 	default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}

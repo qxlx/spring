@@ -1,7 +1,7 @@
 package com.qxlx.main;
 
-import com.qxlx.main.springbean.circulardend.ServiceA;
-import com.qxlx.main.springbean.circulardend.ServiceB;
+import com.qxlx.main.domain.Person;
+import com.qxlx.main.factory.factorybean.A;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -11,7 +11,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MainTest {
 
 	public static void main(String[] args) {
+
 		ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("beans.xml");
+		Person person = classPathXmlApplicationContext.getBean(Person.class);
+		System.out.println("person:"+person);
+
+		A a = (A) classPathXmlApplicationContext.getBean("aFactoryBean");
+		System.out.println("a:"+a);
 //		ServiceA beanServiceA = classPathXmlApplicationContext.getBean(ServiceA.class);
 //		ServiceB beanServiceB = classPathXmlApplicationContext.getBean(ServiceB.class);
 //
@@ -19,8 +25,6 @@ public class MainTest {
 //		System.out.println("beanB:"+beanServiceB);
 //		System.out.println("appliaction:"+beanServiceA.getApplicationContext());
 
-		Person person = classPathXmlApplicationContext.getBean(Person.class);
-		System.out.println("person:"+person);
 	}
 
 }

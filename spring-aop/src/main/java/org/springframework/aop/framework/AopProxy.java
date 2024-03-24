@@ -50,6 +50,7 @@ public interface AopProxy {
 	 * (or {@code null} for the low-level proxy facility's default)
 	 * @return the new proxy object (never {@code null})
 	 */
+	// AOP实现 动态代理
 	Object getProxy(@Nullable ClassLoader classLoader);
 
 }

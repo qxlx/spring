@@ -3,9 +3,19 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean class="com.qxlx.main.Person" id="person">
+	<bean class="com.qxlx.main.domain.Person" id="person" init-method="initPerson">
 		<property name="name" value="qxlx"></property>
 	</bean>
+
+	<bean class="com.qxlx.main.processor.factory.MyBeanFactoryPostProcessor" id="myBeanFactoryPostProcessor">
+	</bean>
+
+
+	<bean class="com.qxlx.main.factory.factorybean.AFactoryBean" id="aFactoryBean">
+	</bean>
+<!--	<aop:aspectj-autoproxy/>-->
+
+<!--	<bean id="aspect" class="com.qxlx.main.aop.AspectJTest"/>-->
 
 <!--	<bean id="serviceA" class="com.qxlx.main.springbean.circulardend.ServiceA" scope="singleton">-->
 <!--		<property name="serviceB" ref="serviceB"/>-->
