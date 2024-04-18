@@ -36,6 +36,7 @@ import org.springframework.beans.BeansException;
  * @param <T> the object type
  * @see FactoryBean
  */
+// 函数式接口,调用其中getObject() 才会执行实际的逻辑
 @FunctionalInterface
 public interface ObjectFactory<T> {
 

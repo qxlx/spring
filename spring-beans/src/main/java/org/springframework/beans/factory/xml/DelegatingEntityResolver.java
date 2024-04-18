@@ -60,6 +60,7 @@ public class DelegatingEntityResolver implements EntityResolver {
 	 */
 	public DelegatingEntityResolver(@Nullable ClassLoader classLoader) {
 		this.dtdResolver = new BeansDtdResolver();
+		// todo tostring() 方法
 		this.schemaResolver = new PluggableSchemaResolver(classLoader);
 	}
 

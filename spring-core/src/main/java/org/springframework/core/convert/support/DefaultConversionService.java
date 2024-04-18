@@ -88,6 +88,7 @@ public class DefaultConversionService extends GenericConversionService {
 		addScalarConverters(converterRegistry);
 		addCollectionConverters(converterRegistry);
 
+		// 转换服务 添加转换器
 		converterRegistry.addConverter(new ByteBufferConverter((ConversionService) converterRegistry));
 		converterRegistry.addConverter(new StringToTimeZoneConverter());
 		converterRegistry.addConverter(new ZoneIdToTimeZoneConverter());

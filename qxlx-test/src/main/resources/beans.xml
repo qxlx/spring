@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean class="com.qxlx.main.domain.Person" id="person" init-method="initPerson">
+
+<!--	<bean id="myFactoryBean" class="com.qxlx.main.extend.MyFactoryBean"></bean>-->
+<!--	<context:component-scan base-package="com.qxlx.main"/>-->
+	<bean class="com.qxlx.main.domain.Person" id="person" >
 		<property name="name" value="qxlx"></property>
+		<property name="phone" ref="phone"/>
 	</bean>
 
-	<bean class="com.qxlx.main.processor.factory.MyBeanFactoryPostProcessor" id="myBeanFactoryPostProcessor">
-	</bean>
+	<bean class="com.qxlx.main.domain.Phone" id="phone"></bean>
+<!--	<bean class="com.qxlx.main.extend.MyBeanFactoryPostProcessor" id="myBeanFactoryPostProcessor" />-->
+
+<!--	<bean class="com.qxlx.main.extend.MyBeanDifinitionRegistryPostProcessor" id="MyBeanDifinitionRegistryPostProcessor" />-->
 
 
-	<bean class="com.qxlx.main.factory.factorybean.AFactoryBean" id="aFactoryBean">
-	</bean>
+<!--	<bean class="com.qxlx.main.processor.factory.MyBeanFactoryPostProcessor" id="myBeanFactoryPostProcessor">-->
+<!--	</bean>-->
+
+
+<!--	<bean class="com.qxlx.main.factory.factorybean.AFactoryBean" id="aFactoryBean">-->
+<!--	</bean>-->
 <!--	<aop:aspectj-autoproxy/>-->
 
 <!--	<bean id="aspect" class="com.qxlx.main.aop.AspectJTest"/>-->

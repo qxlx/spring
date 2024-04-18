@@ -113,8 +113,10 @@ public class CglibSubclassingInstantiationStrategy extends SimpleInstantiationSt
 		 * @return new instance of the dynamically generated subclass
 		 */
 		public Object instantiate(@Nullable Constructor<?> ctor, Object... args) {
+			// 根据beanDifinition创建一个cglib的类
 			Class<?> subclass = createEnhancedSubclass(this.beanDefinition);
 			Object instance;
+			// 构造器等于空 直接通过反射创建
 			if (ctor == null) {
 				instance = BeanUtils.instantiateClass(subclass);
 			}

@@ -50,9 +50,9 @@ import org.springframework.stereotype.Component;
  * @since 3.1
  */
 abstract class ConfigurationClassUtils {
-
+	// 是configuration注解标注的类
 	public static final String CONFIGURATION_CLASS_FULL = "full";
-
+	// 非confituration注解的类 属性标注lite
 	public static final String CONFIGURATION_CLASS_LITE = "lite";
 
 	public static final String CONFIGURATION_CLASS_ATTRIBUTE =
@@ -66,6 +66,7 @@ abstract class ConfigurationClassUtils {
 
 	private static final Set<String> candidateIndicators = new HashSet<>(8);
 
+	// 是否能匹配到
 	static {
 		candidateIndicators.add(Component.class.getName());
 		candidateIndicators.add(ComponentScan.class.getName());
@@ -89,7 +90,7 @@ abstract class ConfigurationClassUtils {
 		if (className == null || beanDef.getFactoryMethodName() != null) {
 			return false;
 		}
-
+        // 分类进行处理 获取注解元数据信息
 		AnnotationMetadata metadata;
 		if (beanDef instanceof AnnotatedBeanDefinition &&
 				className.equals(((AnnotatedBeanDefinition) beanDef).getMetadata().getClassName())) {
@@ -121,9 +122,10 @@ abstract class ConfigurationClassUtils {
 				return false;
 			}
 		}
-
+		// 是否 Configuration
 		Map<String, Object> config = metadata.getAnnotationAttributes(Configuration.class.getName());
 		if (config != null && !Boolean.FALSE.equals(config.get("proxyBeanMethods"))) {
+			// 设置属性值
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_FULL);
 		}
 		else if (config != null || isConfigurationCandidate(metadata)) {
@@ -151,6 +153,7 @@ abstract class ConfigurationClassUtils {
 	 */
 	public static boolean isConfigurationCandidate(AnnotationMetadata metadata) {
 		// Do not consider an interface or an annotation...
+		// 是否是接口
 		if (metadata.isInterface()) {
 			return false;
 		}
@@ -162,6 +165,7 @@ abstract class ConfigurationClassUtils {
 			}
 		}
 
+		// 是否 @bean注解
 		// Finally, let's look for @Bean methods...
 		return hasBeanMethods(metadata);
 	}

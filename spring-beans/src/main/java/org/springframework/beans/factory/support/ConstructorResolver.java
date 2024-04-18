@@ -198,6 +198,9 @@ class ConstructorResolver {
 				minNrOfArgs = resolveConstructorArguments(beanName, mbd, bw, cargs, resolvedValues);
 			}
 
+			// 参数个数进行排序
+			// 一般多个构造器 如何进行选择, 这里进行了排序
+			// 根据参数个数进行匹配 [] 不错的设计点 ⭐️
 			AutowireUtils.sortConstructors(candidates);
 			int minTypeDiffWeight = Integer.MAX_VALUE;
 			Set<Constructor<?>> ambiguousConstructors = null;
@@ -394,11 +397,16 @@ class ConstructorResolver {
 	public BeanWrapper instantiateUsingFactoryMethod(
 			String beanName, RootBeanDefinition mbd, @Nullable Object[] explicitArgs) {
 
+		// 创建包装类
 		BeanWrapperImpl bw = new BeanWrapperImpl();
+		// 初始化包装类
 		this.beanFactory.initBeanWrapper(bw);
 
+		// 工厂实例
 		Object factoryBean;
+		// 工厂类型
 		Class<?> factoryClass;
+		// 判断是否静态
 		boolean isStatic;
 
 		String factoryBeanName = mbd.getFactoryBeanName();

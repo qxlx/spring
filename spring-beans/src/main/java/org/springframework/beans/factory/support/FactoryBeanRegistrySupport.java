@@ -165,7 +165,7 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 					throw pae.getException();
 				}
 			}
-			else {
+			else { // 真实调用FactoryBean的地方
 				object = factory.getObject();
 			}
 		}

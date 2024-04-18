@@ -52,6 +52,7 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	}
 
 	/**
+	 * 构造器
 	 * Determine the candidate constructors to use for the given bean.
 	 * <p>The default implementation returns {@code null}.
 	 * @param beanClass the raw class of the bean (never {@code null})
@@ -87,6 +88,7 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	 * (typically with the passed-in bean instance as default)
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 */
+	// 循环依赖
 	default Object getEarlyBeanReference(Object bean, String beanName) throws BeansException {
 		return bean;
 	}

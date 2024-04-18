@@ -119,15 +119,19 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
+		// 如果存在 销毁
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();
 		}
 		try {
+			// 一堆属性值
 			DefaultListableBeanFactory beanFactory = createBeanFactory(); //创建保存所有Bean定义信息的档案馆
+			// 序列化指定id 反序列化到beanfactory对象
 			beanFactory.setSerializationId(getId());
-			customizeBeanFactory(beanFactory);
-			loadBeanDefinitions(beanFactory);
+			// 定制化beanfactory 设置相关属性 包括是否允许
+			customizeBeanFactory(beanFactory); //
+			loadBeanDefinitions(beanFactory); // 加载配置文件
 			this.beanFactory = beanFactory;
 		}
 		catch (IOException ex) {
@@ -194,6 +198,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowRawInjectionDespiteWrapping
 	 */
 	protected DefaultListableBeanFactory createBeanFactory() {
+		// 创建一个 DefaultListableBeanFactory对象
 		return new DefaultListableBeanFactory(getInternalParentBeanFactory());
 	}
 
@@ -211,10 +216,13 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * @see DefaultListableBeanFactory#setAllowRawInjectionDespiteWrapping
 	 * @see DefaultListableBeanFactory#setAllowEagerClassLoading
 	 */
+	// 设置属性值
 	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
+		//是否允许覆盖同名称的不同定义的对象
 		if (this.allowBeanDefinitionOverriding != null) {
 			beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
+		// 是否允许bean之间存在循环依赖
 		if (this.allowCircularReferences != null) {
 			beanFactory.setAllowCircularReferences(this.allowCircularReferences);
 		}

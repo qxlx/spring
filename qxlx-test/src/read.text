@@ -21,3 +21,23 @@
 6.FactoryBean vs beanFactory 区别
     作用都是用来创建对象的，beanFactory必须遵循完整的创建过程，spring来管理控制
     factoryBean只需要调用getObject()返回具体的对象，整个对象的创建过程用户自定义完成。更加灵活
+
+7.为什么使用三级缓存？
+    关键点在于
+
+8.熟悉主流程，核心点
+
+
+9.lookup-method 标签来解决单例解决原型对象
+  通过拦截器的方式每次需要的时候创建最新的对象,而不会把原型对象缓存起来
+
+  一个单利对象是否可以引用原型对象,不会获取最新的
+
+111.拓展点
+    1.
+
+
+12. 在spring中 为什么大量使用cglib ??? 🤔
+
+13. 创建对象的几种方式
+   a.反射 b.BPF 创建 c.factoryMethod创建 d.factortBean e.supplier

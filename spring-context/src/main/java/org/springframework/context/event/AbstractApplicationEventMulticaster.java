@@ -99,6 +99,7 @@ public abstract class AbstractApplicationEventMulticaster
 	}
 
 
+	// 监听器的添加工作
 	@Override
 	public void addApplicationListener(ApplicationListener<?> listener) {
 		synchronized (this.defaultRetriever) {
@@ -108,6 +109,7 @@ public abstract class AbstractApplicationEventMulticaster
 			if (singletonTarget instanceof ApplicationListener) {
 				this.defaultRetriever.applicationListeners.remove(singletonTarget);
 			}
+			// 新增监听器对象
 			this.defaultRetriever.applicationListeners.add(listener);
 			this.retrieverCache.clear();
 		}
@@ -467,9 +469,10 @@ public abstract class AbstractApplicationEventMulticaster
 	 * Helper class that encapsulates a general set of target listeners.
 	 */
 	private class DefaultListenerRetriever {
-
+		// 存放应用程序事件监听器、有序 不可重复
 		public final Set<ApplicationListener<?>> applicationListeners = new LinkedHashSet<>();
 
+		// 监听器bean名称
 		public final Set<String> applicationListenerBeans = new LinkedHashSet<>();
 
 		public Collection<ApplicationListener<?>> getApplicationListeners() {

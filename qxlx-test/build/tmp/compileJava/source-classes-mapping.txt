@@ -1,24 +1,31 @@
-com/qxlx/main/processor/factory/MyBeanFactoryPostProcessor.java
- com.qxlx.main.processor.factory.MyBeanFactoryPostProcessor
-com/qxlx/main/domain/Person.java
- com.qxlx.main.domain.Person
-com/qxlx/main/springbean/circulardend/constructirijection/A.java
- com.qxlx.main.springbean.circulardend.constructirijection.A
-com/qxlx/main/springbean/circulardend/ServiceB.java
- com.qxlx.main.springbean.circulardend.ServiceB
-com/qxlx/main/aop/AspectJTest.java
- com.qxlx.main.aop.AspectJTest
 com/qxlx/main/springbean/circulardend/constructirijection/B.java
  com.qxlx.main.springbean.circulardend.constructirijection.B
-com/qxlx/main/factory/factorybean/A.java
- com.qxlx.main.factory.factorybean.A
+com/qxlx/main/springbean/circulardend/constructirijection/MainTest.java
+ com.qxlx.main.springbean.circulardend.constructirijection.MainTest
+com/qxlx/main/springbean/circulardend/constructirijection/A.java
+ com.qxlx.main.springbean.circulardend.constructirijection.A
+com/qxlx/main/extend/MyFactoryBean.java
+ com.qxlx.main.extend.A
+ com.qxlx.main.extend.MyFactoryBean
+com/qxlx/main/aop/AspectJTest.java
+ com.qxlx.main.aop.AspectJTest
+com/qxlx/main/extend/MyBeanFactoryPostProcessor.java
+ com.qxlx.main.extend.MyBeanFactoryPostProcessor
+com/qxlx/main/extend/MyInvokeBeanDifinitonResgitryPostProcessor.java
+ com.qxlx.main.extend.MyInvokeBeanDifinitonResgitryPostProcessor
+com/qxlx/main/extend/MyBeanDifinitionRegistryPostProcessor.java
+ com.qxlx.main.extend.MyBeanDifinitionRegistryPostProcessor
+com/qxlx/main/domain/Person.java
+ com.qxlx.main.domain.Person
+com/qxlx/main/springbean/circulardend/ServiceB.java
+ com.qxlx.main.springbean.circulardend.ServiceB
 com/qxlx/main/springbean/circulardend/ServiceA.java
  com.qxlx.main.springbean.circulardend.ServiceA
 com/qxlx/main/aop/AopOpenConfig.java
  com.qxlx.main.aop.AopOpenConfig
-com/qxlx/main/factory/factorybean/AFactoryBean.java
- com.qxlx.main.factory.factorybean.AFactoryBean
-com/qxlx/main/MainTest.java
- com.qxlx.main.MainTest
-com/qxlx/main/springbean/circulardend/constructirijection/MainTest.java
- com.qxlx.main.springbean.circulardend.constructirijection.MainTest
+com/qxlx/main/domain/Phone.java
+ com.qxlx.main.domain.Phone
+com/qxlx/main/extend/MyClassPathXmlAppcation.java
+ com.qxlx.main.extend.MyClassPathXmlAppcation
+com/qxlx/main/SpringTest.java
+ com.qxlx.main.SpringTest

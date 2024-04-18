@@ -42,6 +42,7 @@ import org.springframework.web.context.ConfigurableWebEnvironment;
  * @since 3.1
  * @see StandardEnvironment
  */
+// WEB拓展
 public class StandardServletEnvironment extends StandardEnvironment implements ConfigurableWebEnvironment {
 
 	/** Servlet context init parameters property source name: {@value}. */

@@ -145,8 +145,11 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			}
 		}
 
+		// 拓展方法
 		preProcessXml(root);
+		// 核心解析逻辑
 		parseBeanDefinitions(root, this.delegate);
+		// 拓展方法
 		postProcessXml(root);
 
 		this.delegate = parent;
@@ -173,6 +176,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				if (node instanceof Element) {
 					Element ele = (Element) node;
 					if (delegate.isDefaultNamespace(ele)) { //遍历文档中的所有节点
+						// 解析具体的标签
 						parseDefaultElement(ele, delegate);
 					}
 					else {
@@ -305,8 +309,10 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
 		BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); //把当前标签解析完了，BeanDefinition和beanName都封装在了Holder中
 		if (bdHolder != null) {
+			// 装饰
 			bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
 			try {
+				// 向IOC容器注册
 				// Register the final decorated instance.
 				BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
 			}
