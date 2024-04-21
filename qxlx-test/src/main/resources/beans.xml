@@ -7,9 +7,9 @@
 
 <!--	<bean id="myFactoryBean" class="com.qxlx.main.extend.MyFactoryBean"></bean>-->
 <!--	<context:component-scan base-package="com.qxlx.main"/>-->
-	<bean class="com.qxlx.main.domain.Person" id="person" >
-		<property name="name" value="qxlx"></property>
-	</bean>
+<!--	<bean class="com.qxlx.main.domain.Person" id="person" >-->
+<!--		<property name="name" value="qxlx"></property>-->
+<!--	</bean>-->
 
 <!--	<bean class="com.qxlx.main.domain.Phone" id="phone"></bean>-->
 <!--	<bean class="com.qxlx.main.extend.MyBeanFactoryPostProcessor" id="myBeanFactoryPostProcessor" />-->
@@ -27,12 +27,12 @@
 
 <!--	<bean id="aspect" class="com.qxlx.main.aop.AspectJTest"/>-->
 
-<!--	<bean id="serviceA" class="com.qxlx.main.springbean.circulardend.ServiceA" scope="singleton">-->
-<!--		<property name="serviceB" ref="serviceB"/>-->
-<!--	</bean>-->
+<!--	三级缓存-->
+	<bean id="serviceA" class="com.qxlx.main.springbean.circulardend.ServiceA" scope="singleton">
+		<property name="serviceB" ref="serviceB"/>
+	</bean>
 
-
-<!--	<bean id="serviceB" class="com.qxlx.main.springbean.circulardend.ServiceB"  scope="singleton">-->
-<!--		<property name="serviceA" ref="serviceA"/>-->
-<!--	</bean>-->
+	<bean id="serviceB" class="com.qxlx.main.springbean.circulardend.ServiceB"  scope="singleton">
+		<property name="serviceA" ref="serviceA"/>
+	</bean>
 </beans>

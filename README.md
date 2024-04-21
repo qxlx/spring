@@ -1,34 +1,43 @@
-# <img src="src/docs/spring-framework.png" width="80" height="80"> Spring Framework [![Build Status](https://ci.spring.io/api/v1/teams/spring-framework/pipelines/spring-framework-5.3.x/jobs/build/badge)](https://ci.spring.io/teams/spring-framework/pipelines/spring-framework-5.3.x?groups=Build") [![Revved up by Gradle Enterprise](https://img.shields.io/badge/Revved%20up%20by-Gradle%20Enterprise-06A0CE?logo=Gradle&labelColor=02303A)](https://ge.spring.io/scans?search.rootProjectNames=spring)
+1.spring 为什么不采用new的方式，而是通过反射创建。
+灵活，运行时创建  Class类信息可以获取
 
-This is the home of the Spring Framework: the foundation for all [Spring projects](https://spring.io/projects). Collectively the Spring Framework and the family of Spring projects are often referred to simply as "Spring". 
+2.实例化 vs 初始化
+实例话-堆中开辟一块空间，对象属性值都是默认值
+初始化：给属性设置值，1.填充属性 2.执行初始化方法 init-method 3.aop
 
-Spring provides everything required beyond the Java programming language for creating enterprise applications for a wide range of scenarios and architectures. Please read the [Overview](https://docs.spring.io/spring/docs/current/spring-framework-reference/overview.html#spring-introduction) section as reference for a more complete introduction.
+3.aware接口到底是干什么的
+当spring容器创建的bean对象在进行具体操作的时候，如果需要容器的其他对象，此时可以将对象实现aware接口。
+来满足当前需要
 
-## Code of Conduct
+4.springbean包含两个
+普通对象：我们自定义需要的对象
+容器对象：内置对象Spring需要的对象
 
-This project is governed by the [Spring Code of Conduct](CODE_OF_CONDUCT.adoc). By participating, you are expected to uphold this code of conduct. Please report unacceptable behavior to spring-code-of-conduct@pivotal.io.
+5.重要的接口
+beanfactory、Aware、BeanDefinition、BeanDefinitionReader、BeanFactoryPostProcessor
+BeanPostProcessor
+Environment: 环境 -standardEnviroment
 
-## Access to Binaries
+6.FactoryBean vs beanFactory 区别
+作用都是用来创建对象的，beanFactory必须遵循完整的创建过程，spring来管理控制
+factoryBean只需要调用getObject()返回具体的对象，整个对象的创建过程用户自定义完成。更加灵活
 
-For access to artifacts or a distribution zip, see the [Spring Framework Artifacts](https://github.com/spring-projects/spring-framework/wiki/Spring-Framework-Artifacts) wiki page.
+7.为什么使用三级缓存？
+关键点在于
 
-## Documentation
+8.熟悉主流程，核心点
 
-The Spring Framework maintains reference documentation ([published](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/) and [source](src/docs/asciidoc)), Github [wiki pages](https://github.com/spring-projects/spring-framework/wiki), and an
-[API reference](https://docs.spring.io/spring-framework/docs/current/javadoc-api/). There are also [guides and tutorials](https://spring.io/guides) across Spring projects.
 
-## Micro-Benchmarks
+9.lookup-method 标签来解决单例解决原型对象
+通过拦截器的方式每次需要的时候创建最新的对象,而不会把原型对象缓存起来
 
-See the [Micro-Benchmarks](https://github.com/spring-projects/spring-framework/wiki/Micro-Benchmarks) Wiki page.
+一个单利对象是否可以引用原型对象,不会获取最新的
 
-## Build from Source
+111.拓展点
+1.
 
-See the [Build from Source](https://github.com/spring-projects/spring-framework/wiki/Build-from-Source) Wiki page and the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
-## Stay in Touch
+12. 在spring中 为什么大量使用cglib ??? 🤔
 
-Follow [@SpringCentral](https://twitter.com/springcentral), [@SpringFramework](https://twitter.com/springframework), and its [team members](https://twitter.com/springframework/lists/team/members) on Twitter. In-depth articles can be found at [The Spring Blog](https://spring.io/blog/), and releases are announced via our [news feed](https://spring.io/blog/category/news).
-
-## License
-
-The Spring Framework is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
+13. 创建对象的几种方式
+    a.反射 b.BPF 创建 c.factoryMethod创建 d.factortBean e.supplier

@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
  * @date 2023/7/30 10:01 AM
  */
 @Service
-public class ServiceA implements ApplicationContextAware {
-
-	private ApplicationContext applicationContext;
+public class ServiceA {
 
 	private ServiceB serviceB;
 
@@ -24,16 +22,8 @@ public class ServiceA implements ApplicationContextAware {
 		this.serviceB = serviceB;
 	}
 
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
-
 	public ServiceA() {
 		System.out.println("serviceA构造成功");
 	}
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
 }

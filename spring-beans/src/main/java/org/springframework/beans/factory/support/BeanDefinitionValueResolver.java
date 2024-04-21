@@ -315,6 +315,7 @@ class BeanDefinitionValueResolver {
 					bean = parent.getBean(beanType);
 				}
 				else {
+
 					bean = parent.getBean(String.valueOf(doEvaluate(ref.getBeanName())));
 				}
 			}
@@ -326,6 +327,7 @@ class BeanDefinitionValueResolver {
 					resolvedName = namedBean.getBeanName();
 				}
 				else {
+					// 获取bean从IOC 获取B对象 循环依赖对象
 					resolvedName = String.valueOf(doEvaluate(ref.getBeanName()));
 					bean = this.beanFactory.getBean(resolvedName);
 				}
