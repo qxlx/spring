@@ -15,17 +15,29 @@ com/qxlx/main/extend/MyInvokeBeanDifinitonResgitryPostProcessor.java
  com.qxlx.main.extend.MyInvokeBeanDifinitonResgitryPostProcessor
 com/qxlx/main/extend/MyBeanDifinitionRegistryPostProcessor.java
  com.qxlx.main.extend.MyBeanDifinitionRegistryPostProcessor
-com/qxlx/main/domain/Person.java
- com.qxlx.main.domain.Person
+com/qxlx/main/domain/Phone.java
+ com.qxlx.main.domain.Phone
 com/qxlx/main/springbean/circulardend/ServiceB.java
  com.qxlx.main.springbean.circulardend.ServiceB
 com/qxlx/main/springbean/circulardend/ServiceA.java
  com.qxlx.main.springbean.circulardend.ServiceA
-com/qxlx/main/aop/AopOpenConfig.java
- com.qxlx.main.aop.AopOpenConfig
-com/qxlx/main/domain/Phone.java
- com.qxlx.main.domain.Phone
-com/qxlx/main/extend/MyClassPathXmlAppcation.java
- com.qxlx.main.extend.MyClassPathXmlAppcation
 com/qxlx/main/SpringTest.java
  com.qxlx.main.SpringTest
+com/qxlx/main/domain/Person.java
+ com.qxlx.main.domain.Person
+com/qxlx/main/extend/MyMethodInterceptor.java
+ com.qxlx.main.extend.MyMethodInterceptor
+com/qxlx/main/aop/AopOpenConfig.java
+ com.qxlx.main.aop.AopOpenConfig
+com/qxlx/main/extend/UserBeanFactoryPostProcessor.java
+ com.qxlx.main.extend.UserBeanFactoryPostProcessor
+com/qxlx/main/extend/MyInstantiationAwareBeanPostProcessor.java
+ com.qxlx.main.extend.MyInstantiationAwareBeanPostProcessor
+com/qxlx/main/domain/BeforeInstantiation.java
+ com.qxlx.main.domain.BeforeInstantiation
+com/qxlx/main/extend/MyClassPathXmlAppcation.java
+ com.qxlx.main.extend.MyClassPathXmlAppcation
+com/qxlx/main/domain/User.java
+ com.qxlx.main.domain.User
+com/qxlx/main/domain/CreateSupplier.java
+ com.qxlx.main.domain.CreateSupplier

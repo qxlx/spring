@@ -15,8 +15,6 @@ public class SpringTest {
 
 		ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("beans.xml");
 		Person person = classPathXmlApplicationContext.getBean(Person.class);
-		System.out.println("person:"+person.getPhone());
-		System.out.println("person:"+person.getPhone());
 
 //		MyFactoryBean myFactoryBean = (MyFactoryBean) classPathXmlApplicationContext.getBean("&myFactoryBean");
 //		System.out.println(myFactoryBean);

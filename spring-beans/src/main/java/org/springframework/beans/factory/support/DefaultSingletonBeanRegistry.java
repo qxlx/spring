@@ -156,8 +156,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		synchronized (this.singletonObjects) {
 			//一级缓存是否存在
 			if (!this.singletonObjects.containsKey(beanName)) { //当前对象如果没有在单例池中
-				//加入到三级缓存中
+				//加入到三级缓存中 单利工厂
 				this.singletonFactories.put(beanName, singletonFactory);
+				// 删除早期单利bean
 				this.earlySingletonObjects.remove(beanName);
 				this.registeredSingletons.add(beanName);
 			}

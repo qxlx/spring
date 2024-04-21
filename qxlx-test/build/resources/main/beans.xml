@@ -9,10 +9,9 @@
 <!--	<context:component-scan base-package="com.qxlx.main"/>-->
 	<bean class="com.qxlx.main.domain.Person" id="person" >
 		<property name="name" value="qxlx"></property>
-		<property name="phone" ref="phone"/>
 	</bean>
 
-	<bean class="com.qxlx.main.domain.Phone" id="phone"></bean>
+<!--	<bean class="com.qxlx.main.domain.Phone" id="phone"></bean>-->
 <!--	<bean class="com.qxlx.main.extend.MyBeanFactoryPostProcessor" id="myBeanFactoryPostProcessor" />-->
 
 <!--	<bean class="com.qxlx.main.extend.MyBeanDifinitionRegistryPostProcessor" id="MyBeanDifinitionRegistryPostProcessor" />-->
