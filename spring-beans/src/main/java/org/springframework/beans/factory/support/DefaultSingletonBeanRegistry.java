@@ -76,12 +76,14 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 
 	/** 享元模式的单例。缓存所有单实例对象，单例对象池。ioc容器-单例池； Cache of singleton objects: bean name to bean instance. */
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
+//	public final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 
 	/** Cache of singleton factories: bean name to ObjectFactory. */
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
 	/** Cache of early singleton objects: bean name to bean instance. */
 	private final Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
+//	public final Map<String, Object> earlySingletonObjects = new ConcurrentHashMap<>(16);
 
 	/** Set of registered singletons, containing the bean names in registration order. */
 	private final Set<String> registeredSingletons = new LinkedHashSet<>(256);
@@ -181,6 +183,8 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 */
 	@Nullable  //双检查锁
 	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
+		// 调整二级缓存
+
 		//先检查单例缓存池，获取当前对象  Quick check for existing instance without full singleton lock
 		Object singletonObject = this.singletonObjects.get(beanName); //一级缓存
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) { //如果当前bean正在创建过程中，而且缓存中没有则继续
@@ -205,6 +209,18 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		}
 		return singletonObject;
 	}
+
+	//双检查锁
+//	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
+//		Object o = singletonObjects.get(beanName);
+//		if (o == null && isSingletonCurrentlyInCreation(beanName)) {
+//			synchronized (this.singletonObjects) {
+//				o = this.earlySingletonObjects.get(beanName);
+//				return o;
+//			}
+//		}
+//		return o != null ? o : null;
+//	}
 
 	/**
 	 * Return the (raw) singleton object registered under the given name,

@@ -15,14 +15,15 @@ public class SpringTest {
 //		MyClassPathXmlAppcation myClassPathXmlAppcation = new MyClassPathXmlAppcation("beans.xml");
 
 		ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("beans.xml");
-		ServiceA beanServiceA = classPathXmlApplicationContext.getBean(ServiceA.class);
-		ServiceB beanServiceB = classPathXmlApplicationContext.getBean(ServiceB.class);
+//		ServiceA beanServiceA = classPathXmlApplicationContext.getBean(ServiceA.class);
+//		ServiceB beanServiceB = classPathXmlApplicationContext.getBean(ServiceB.class);
+//
+//		System.out.println("beanA:" + beanServiceA);
+//		System.out.println("beanB:" + beanServiceB);
 
-		System.out.println("beanA:" + beanServiceA);
-		System.out.println("beanB:" + beanServiceB);
-
-//		Person se = classPathXmlApplicationContext.getBean(Person.class);
-
+		Person se = classPathXmlApplicationContext.getBean(Person.class);
+		se.test();
+		System.out.println(se);
 //		MyFactoryBean myFactoryBean = (MyFactoryBean) classPathXmlApplicationContext.getBean("&myFactoryBean");
 //		System.out.println(myFactoryBean);
 //		Object user = classPathXmlApplicationContext.getBean("myFactoryBean");

@@ -24,4 +24,8 @@ public class Person {
 		this.name = name;
 	}
 
+	public void test() {
+		System.out.println("person test===");
+	}
+
 }
