@@ -613,7 +613,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			// //三级缓存中的Bean也会被后置处理来增强，
 			// 避免后期循环依赖, 将bean初始化完成前将创建实例工厂存储三级缓存
 			// lambad 表达式
-			// 修改成二级缓存
+			// 修改成二级缓存  添加到三级缓存中
 			addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
 
 			// 添加到二级缓存
