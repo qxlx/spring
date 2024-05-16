@@ -220,7 +220,7 @@ public abstract class AopUtils {
 	 * @param hasIntroductions whether or not the advisor chain
 	 * for this bean includes any introductions
 	 * @return whether the pointcut can apply on any method
-	 */
+	 */// 查看当前类是否有需要动态代理的方法 返回true false
 	public static boolean canApply(Pointcut pc, Class<?> targetClass, boolean hasIntroductions) {
 		Assert.notNull(pc, "Pointcut must not be null");
 		if (!pc.getClassFilter().matches(targetClass)) {
@@ -239,19 +239,19 @@ public abstract class AopUtils {
 		}
 
 		Set<Class<?>> classes = new LinkedHashSet<>();
-		if (!Proxy.isProxyClass(targetClass)) {
+		if (!Proxy.isProxyClass(targetClass)) { // 是否是代理对象
 			classes.add(ClassUtils.getUserClass(targetClass));
-		}
+		}//所有接口对于当前class
 		classes.addAll(ClassUtils.getAllInterfacesForClassAsSet(targetClass));
-
+		// 遍历循环class
 		for (Class<?> clazz : classes) {
-			Method[] methods = ReflectionUtils.getAllDeclaredMethods(clazz);
-			for (Method method : methods) {
+			Method[] methods = ReflectionUtils.getAllDeclaredMethods(clazz);// 获取用户所有方法,遍历 进行匹配
+			for (Method method : methods) { // 为什么匹配到一个就直接返回呢
 				if (introductionAwareMethodMatcher != null ?
 						introductionAwareMethodMatcher.matches(method, targetClass, hasIntroductions) :
 						methodMatcher.matches(method, targetClass)) {
 					return true;
-				}
+				}// 在运行时进行方法蓝莓的时候还会进行方法切点 规则匹配
 			}
 		}
 
@@ -306,8 +306,10 @@ public abstract class AopUtils {
 		if (candidateAdvisors.isEmpty()) {
 			return candidateAdvisors;
 		}
+		// 集合
 		List<Advisor> eligibleAdvisors = new ArrayList<>();
 		for (Advisor candidate : candidateAdvisors) {
+			// 判断我们的增强器是不是实现了 IntroductionAdvisor 事务的没有
 			if (candidate instanceof IntroductionAdvisor && canApply(candidate, clazz)) {
 				eligibleAdvisors.add(candidate);
 			}
@@ -317,7 +319,7 @@ public abstract class AopUtils {
 			if (candidate instanceof IntroductionAdvisor) {
 				// already processed
 				continue;
-			}
+			} // 真正的判断增强器是否适合当前类型
 			if (canApply(candidate, clazz, hasIntroductions)) {
 				eligibleAdvisors.add(candidate);
 			}

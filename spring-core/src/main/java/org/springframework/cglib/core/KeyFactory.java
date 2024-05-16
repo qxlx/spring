@@ -166,7 +166,9 @@ abstract public class KeyFactory {
 
 	public static KeyFactory create(ClassLoader loader, Class keyInterface, KeyFactoryCustomizer customizer,
 			List<KeyFactoryCustomizer> next) {
+		//生成器
 		Generator gen = new Generator();
+		// 接口
 		gen.setInterface(keyInterface);
 		// SPRING PATCH BEGIN
 		gen.setContextClass(keyInterface);
@@ -233,6 +235,7 @@ abstract public class KeyFactory {
 		}
 
 		public KeyFactory create() {
+			// 名称前缀
 			setNamePrefix(keyInterface.getName());
 			return (KeyFactory) super.create(keyInterface.getName());
 		}

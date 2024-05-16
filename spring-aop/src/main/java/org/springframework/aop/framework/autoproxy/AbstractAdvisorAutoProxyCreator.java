@@ -95,8 +95,8 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	protected List<Advisor> findEligibleAdvisors(Class<?> beanClass, String beanName) {
 		List<Advisor> candidateAdvisors = findCandidateAdvisors(); //缓存中直接就会有
 		List<Advisor> eligibleAdvisors = findAdvisorsThatCanApply(candidateAdvisors, beanClass, beanName); //看增强器能不能应用到这个对象上
-		extendAdvisors(eligibleAdvisors);
-		if (!eligibleAdvisors.isEmpty()) {
+		extendAdvisors(eligibleAdvisors); // 提供hook方法,用于对目标advisor进行拓展
+		if (!eligibleAdvisors.isEmpty()) { // 排序
 			eligibleAdvisors = sortAdvisors(eligibleAdvisors);
 		}
 		return eligibleAdvisors;
@@ -108,6 +108,7 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	 */
 	protected List<Advisor> findCandidateAdvisors() {
 		Assert.state(this.advisorRetrievalHelper != null, "No BeanFactoryAdvisorRetrievalHelper available");
+		// 获取所有的额增强器
 		return this.advisorRetrievalHelper.findAdvisorBeans();
 	}
 

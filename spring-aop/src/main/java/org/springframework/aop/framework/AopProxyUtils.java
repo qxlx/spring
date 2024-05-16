@@ -116,27 +116,34 @@ public abstract class AopProxyUtils {
 	 * @see DecoratingProxy
 	 */
 	static Class<?>[] completeProxiedInterfaces(AdvisedSupport advised, boolean decoratingProxy) {
+		//
 		Class<?>[] specifiedInterfaces = advised.getProxiedInterfaces();
 		if (specifiedInterfaces.length == 0) {
 			// No user-specified interfaces: check whether target class is an interface.
+			// 获取目标类
 			Class<?> targetClass = advised.getTargetClass();
 			if (targetClass != null) {
+				// 是否接口
 				if (targetClass.isInterface()) {
 					advised.setInterfaces(targetClass);
 				}
+				// 是否代理类
 				else if (Proxy.isProxyClass(targetClass)) {
 					advised.setInterfaces(targetClass.getInterfaces());
 				}
 				specifiedInterfaces = advised.getProxiedInterfaces();
 			}
 		}
+		// 是否需要添加springproxy接口
 		boolean addSpringProxy = !advised.isInterfaceProxied(SpringProxy.class);
 		boolean addAdvised = !advised.isOpaque() && !advised.isInterfaceProxied(Advised.class);
 		boolean addDecoratingProxy = (decoratingProxy && !advised.isInterfaceProxied(DecoratingProxy.class));
 		int nonUserIfcCount = 0;
+		// 需要添加springproxy接口
 		if (addSpringProxy) {
 			nonUserIfcCount++;
 		}
+		// 添加通知
 		if (addAdvised) {
 			nonUserIfcCount++;
 		}
@@ -144,13 +151,16 @@ public abstract class AopProxyUtils {
 			nonUserIfcCount++;
 		}
 		Class<?>[] proxiedInterfaces = new Class<?>[specifiedInterfaces.length + nonUserIfcCount];
+		//
 		System.arraycopy(specifiedInterfaces, 0, proxiedInterfaces, 0, specifiedInterfaces.length);
 		int index = specifiedInterfaces.length;
 		if (addSpringProxy) {
+			// 为目标接口添加 SpringProxy 接口
 			proxiedInterfaces[index] = SpringProxy.class;
 			index++;
 		}
 		if (addAdvised) {
+			// 目标接口添加  Advised
 			proxiedInterfaces[index] = Advised.class;
 			index++;
 		}

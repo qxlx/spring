@@ -1,11 +1,12 @@
 package com.qxlx.main;
 
 import com.qxlx.main.domain.Person;
-import com.qxlx.main.springbean.circulardend.ServiceA;
-import com.qxlx.main.springbean.circulardend.ServiceB;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ *
+ *  https://www.cnblogs.com/java-chen-hao/category/1480619.html 文章推荐阅读
+ *
  * @author jiabaobao
  * @date 2023/7/19 8:55 AM
  */
@@ -24,6 +25,7 @@ public class SpringTest {
 		Person se = classPathXmlApplicationContext.getBean(Person.class);
 		se.test();
 		System.out.println(se);
+
 //		MyFactoryBean myFactoryBean = (MyFactoryBean) classPathXmlApplicationContext.getBean("&myFactoryBean");
 //		System.out.println(myFactoryBean);
 //		Object user = classPathXmlApplicationContext.getBean("myFactoryBean");

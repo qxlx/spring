@@ -180,6 +180,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 						parseDefaultElement(ele, delegate);
 					}
 					else {
+						// AOP 标签
 						delegate.parseCustomElement(ele);
 					}
 				}

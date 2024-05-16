@@ -42,3 +42,7 @@ factoryBean只需要调用getObject()返回具体的对象，整个对象的创�
 
 13. 创建对象的几种方式
     a.反射 b.BPF 创建 c.factoryMethod创建 d.factortBean e.supplier
+
+14.advisor: 通知器包含advice和pointcut
+  advice: 具体的某一个消息通知
+  adviced: 配置代理,proxyFactory

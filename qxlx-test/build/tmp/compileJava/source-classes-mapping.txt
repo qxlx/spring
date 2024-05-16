@@ -6,18 +6,18 @@ com/qxlx/main/springbean/circulardend/constructirijection/A.java
  com.qxlx.main.springbean.circulardend.constructirijection.A
 com/qxlx/main/springbean/circulardend/ServiceB.java
  com.qxlx.main.springbean.circulardend.ServiceB
-com/qxlx/main/extend/MyInstantiationAwareBeanPostProcessor.java
- com.qxlx.main.extend.MyInstantiationAwareBeanPostProcessor
-com/qxlx/main/extend/MyMethodInterceptor.java
- com.qxlx.main.extend.MyMethodInterceptor
-com/qxlx/main/aop/AopOpenConfig.java
- com.qxlx.main.aop.AopOpenConfig
+com/qxlx/main/proxy/Test.java
+ com.qxlx.main.proxy.Test
+com/qxlx/main/proxy/MyCalculator.java
+ com.qxlx.main.proxy.MyCalculator
+com/qxlx/main/domain/Person.java
+ com.qxlx.main.domain.Person
 com/qxlx/main/domain/Phone.java
  com.qxlx.main.domain.Phone
 com/qxlx/main/domain/BeforeInstantiation.java
  com.qxlx.main.domain.BeforeInstantiation
-com/qxlx/main/extend/MyClassPathXmlAppcation.java
- com.qxlx.main.extend.MyClassPathXmlAppcation
+com/qxlx/main/aop/AspectJTest.java
+ com.qxlx.main.aop.AspectJTest
 com/qxlx/main/domain/User.java
  com.qxlx.main.domain.User
 com/qxlx/main/domain/CreateSupplier.java
@@ -27,17 +27,26 @@ com/qxlx/main/extend/MyFactoryBean.java
  com.qxlx.main.extend.MyFactoryBean
 com/qxlx/main/extend/MyBeanFactoryPostProcessor.java
  com.qxlx.main.extend.MyBeanFactoryPostProcessor
-com/qxlx/main/extend/MyBeanDifinitionRegistryPostProcessor.java
- com.qxlx.main.extend.MyBeanDifinitionRegistryPostProcessor
+com/qxlx/main/extend/UserBeanFactoryPostProcessor.java
+ com.qxlx.main.extend.UserBeanFactoryPostProcessor
 com/qxlx/main/springbean/circulardend/constructirijection/B.java
  com.qxlx.main.springbean.circulardend.constructirijection.B
 com/qxlx/main/springbean/circulardend/ServiceA.java
  com.qxlx.main.springbean.circulardend.ServiceA
-com/qxlx/main/extend/UserBeanFactoryPostProcessor.java
- com.qxlx.main.extend.UserBeanFactoryPostProcessor
-com/qxlx/main/aop/AspectJTest.java
- com.qxlx.main.aop.AspectJTest
-com/qxlx/main/domain/Person.java
- com.qxlx.main.domain.Person
+com/qxlx/main/extend/MyBeanDifinitionRegistryPostProcessor.java
+ com.qxlx.main.extend.MyBeanDifinitionRegistryPostProcessor
+com/qxlx/main/proxy/Calculator.java
+ com.qxlx.main.proxy.Calculator
 com/qxlx/main/SpringTest.java
  com.qxlx.main.SpringTest
+com/qxlx/main/extend/MyMethodInterceptor.java
+ com.qxlx.main.extend.MyMethodInterceptor
+com/qxlx/main/aop/AopOpenConfig.java
+ com.qxlx.main.aop.AopOpenConfig
+com/qxlx/main/extend/MyInstantiationAwareBeanPostProcessor.java
+ com.qxlx.main.extend.MyInstantiationAwareBeanPostProcessor
+com/qxlx/main/proxy/CalculatorProxy.java
+ com.qxlx.main.proxy.CalculatorProxy
+ com.qxlx.main.proxy.CalculatorProxy$1
+com/qxlx/main/extend/MyClassPathXmlAppcation.java
+ com.qxlx.main.extend.MyClassPathXmlAppcation

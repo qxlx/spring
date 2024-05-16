@@ -43,7 +43,7 @@ public class DefaultAdvisorAdapterRegistry implements AdvisorAdapterRegistry, Se
 	private final List<AdvisorAdapter> adapters = new ArrayList<>(3);
 
 
-	/**
+	/**把已有的advice实现adapter加入进来
 	 * Create a new DefaultAdvisorAdapterRegistry, registering well-known adapters.
 	 */
 	public DefaultAdvisorAdapterRegistry() {

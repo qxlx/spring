@@ -27,7 +27,7 @@ import org.springframework.lang.Nullable;
 
 /**
  * Spring AOP advice wrapping an AspectJ after advice method.
- *
+ *AspectJAfterAdvice
  * @author Rod Johnson
  * @since 2.0
  */

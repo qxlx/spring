@@ -59,6 +59,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 		Class<?> actualClass = (targetClass != null ? targetClass : method.getDeclaringClass());
 		Boolean hasIntroductions = null;
 
+		// 排序 循环目标方法匹配的通知
 		for (Advisor advisor : advisors) {
 			if (advisor instanceof PointcutAdvisor) {
 				// Add it conditionally.
@@ -75,7 +76,7 @@ public class DefaultAdvisorChainFactory implements AdvisorChainFactory, Serializ
 					else {
 						match = mm.matches(method, actualClass);
 					}
-					if (match) {
+					if (match) {//拦截器链是通过advisoradapterRegister
 						MethodInterceptor[] interceptors = registry.getInterceptors(advisor);//（如果是通知方法）把增强器转拦截器
 						if (mm.isRuntime()) {
 							// Creating a new object instance in the getInterceptors() method

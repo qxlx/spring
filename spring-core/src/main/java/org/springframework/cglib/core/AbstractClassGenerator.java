@@ -104,9 +104,11 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 				throw new IllegalArgumentException("classLoader == null is not yet supported");
 			}
 			this.classLoader = new WeakReference<ClassLoader>(classLoader);
+			// 函数式接口
 			Function<AbstractClassGenerator, Object> load =
 					new Function<AbstractClassGenerator, Object>() {
 						public Object apply(AbstractClassGenerator gen) {
+							// 创建字节码的逻辑 在这里
 							Class klass = gen.generate(ClassLoaderData.this);
 							return gen.wrapCachedClass(klass);
 						}
@@ -300,7 +302,9 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 
 	protected Object create(Object key) {
 		try {
+			// 类加载器
 			ClassLoader loader = getClassLoader();
+			// key classLoader value : classLoaderData
 			Map<ClassLoader, ClassLoaderData> cache = CACHE;
 			ClassLoaderData data = cache.get(loader);
 			if (data == null) {
@@ -308,6 +312,7 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 					cache = CACHE;
 					data = cache.get(loader);
 					if (data == null) {
+						// 创建
 						Map<ClassLoader, ClassLoaderData> newCache = new WeakHashMap<ClassLoader, ClassLoaderData>(cache);
 						data = new ClassLoaderData(loader);
 						newCache.put(loader, data);
@@ -355,7 +360,9 @@ abstract public class AbstractClassGenerator<T> implements ClassGenerator {
 					// ignore
 				}
 			}
+			// 生成字节
 			byte[] b = strategy.generate(this);
+			// className
 			String className = ClassNameReader.getClassName(new ClassReader(b));
 			ProtectionDomain protectionDomain = getProtectionDomain();
 			synchronized (classLoader) { // just in case

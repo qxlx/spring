@@ -102,6 +102,7 @@ public class ProxyCreatorSupport extends AdvisedSupport {
 		if (!this.active) {
 			activate();
 		}
+		// 通知AOP
 		return getAopProxyFactory().createAopProxy(this);
 	}
 
