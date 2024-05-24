@@ -16,8 +16,9 @@ com/qxlx/main/domain/Phone.java
  com.qxlx.main.domain.Phone
 com/qxlx/main/domain/BeforeInstantiation.java
  com.qxlx.main.domain.BeforeInstantiation
-com/qxlx/main/aop/AspectJTest.java
- com.qxlx.main.aop.AspectJTest
+com/qxlx/main/proxy/CalculatorProxy.java
+ com.qxlx.main.proxy.CalculatorProxy
+ com.qxlx.main.proxy.CalculatorProxy$1
 com/qxlx/main/domain/User.java
  com.qxlx.main.domain.User
 com/qxlx/main/domain/CreateSupplier.java
@@ -37,16 +38,15 @@ com/qxlx/main/extend/MyBeanDifinitionRegistryPostProcessor.java
  com.qxlx.main.extend.MyBeanDifinitionRegistryPostProcessor
 com/qxlx/main/proxy/Calculator.java
  com.qxlx.main.proxy.Calculator
-com/qxlx/main/SpringTest.java
- com.qxlx.main.SpringTest
-com/qxlx/main/extend/MyMethodInterceptor.java
- com.qxlx.main.extend.MyMethodInterceptor
-com/qxlx/main/aop/AopOpenConfig.java
- com.qxlx.main.aop.AopOpenConfig
 com/qxlx/main/extend/MyInstantiationAwareBeanPostProcessor.java
  com.qxlx.main.extend.MyInstantiationAwareBeanPostProcessor
-com/qxlx/main/proxy/CalculatorProxy.java
- com.qxlx.main.proxy.CalculatorProxy
- com.qxlx.main.proxy.CalculatorProxy$1
+com/qxlx/main/extend/MyMethodInterceptor.java
+ com.qxlx.main.extend.MyMethodInterceptor
+com/qxlx/main/SpringTest.java
+ com.qxlx.main.SpringTest
 com/qxlx/main/extend/MyClassPathXmlAppcation.java
  com.qxlx.main.extend.MyClassPathXmlAppcation
+com/qxlx/main/aop/AopOpenConfig.java
+ com.qxlx.main.aop.AopOpenConfig
+com/qxlx/main/aop/AspectJTest.java
+ com.qxlx.main.aop.AspectJTest

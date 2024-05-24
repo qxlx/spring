@@ -109,7 +109,8 @@ final class PostProcessorRegistrationDelegate {
 			// 当前的 BDRPP
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
-			// 首先：从工厂中获取所有的实现了 PriorityOrdered 接口的 BeanDefinitionRegistryPostProcessor； First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
+			// 首先：从工厂中获取所有的实现了 PriorityOrdered 接口的 BeanDefinitionRegistryPostProcessor；
+			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			//拿到系统中每一个组件的BD信息，进行类型对比，是否匹配指定的类型
@@ -156,6 +157,8 @@ final class PostProcessorRegistrationDelegate {
 				invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry, beanFactory.getApplicationStartup());
 				currentRegistryProcessors.clear(); //防止重复执行
 			}
+			// postProcessBeanDefinitionRegistry [核心逻辑]
+			// postProcessBeanFactory
 
 			// 接下来，再来执行postProcessBeanFactory的回调，
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.

@@ -26,6 +26,7 @@ import org.springframework.aop.AfterAdvice;
 import org.springframework.lang.Nullable;
 
 /**
+ * 回调回来之后执行
  * Spring AOP advice wrapping an AspectJ after advice method.
  *AspectJAfterAdvice
  * @author Rod Johnson

@@ -175,6 +175,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				Node node = nl.item(i);
 				if (node instanceof Element) {
 					Element ele = (Element) node;
+					// bean 标签 使用默认标签进行解析
 					if (delegate.isDefaultNamespace(ele)) { //遍历文档中的所有节点
 						// 解析具体的标签
 						parseDefaultElement(ele, delegate);

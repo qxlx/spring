@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.*;
 
 @Aspect
 public class AspectJTest {
+
 	@Pointcut("execution(* *.test(..))")
 	public void test() {
 	}
@@ -30,5 +31,16 @@ public class AspectJTest {
 	@After("test()")
 	public void afterTest() {
 		System.out.println("afterTest");
+	}
+
+	@AfterThrowing("test()")
+	public void afterThrowingTest() {
+		System.out.println("AfterThrowing");
+	}
+
+
+	@AfterReturning("test()")
+	public void afterReturningTest() {
+		System.out.println("AfterReturning");
 	}
 }
