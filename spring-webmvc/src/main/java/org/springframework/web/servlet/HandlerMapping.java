@@ -22,6 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.lang.Nullable;
 
 /**
+ * 找到request响应处理器的handler和interceptors
+ * 1.自定义实现
+ * 2.如何添加
+ *    基本的bean对象,然后
+ *    默认实现
+ *
+ *    BeanNameUrlHandlerMapping
+ *    RequestMappingHandlerMapping
  * Interface to be implemented by objects that define a mapping between
  * requests and handler objects.
  *

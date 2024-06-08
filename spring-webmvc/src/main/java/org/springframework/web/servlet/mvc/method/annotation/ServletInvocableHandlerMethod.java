@@ -104,8 +104,12 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 			Object... providedArgs) throws Exception {
 		//目标方法的反射执行过程
 		Object returnValue = invokeForRequest(webRequest, mavContainer, providedArgs);
+		// 设置响应状态码
 		setResponseStatus(webRequest);
 
+		// 处理返回值 判断返回值是否为空
+		// string\json\xml 返回值类型可能多种
+		// 参数和返回值都可能多种类型
 		if (returnValue == null) {
 			if (isRequestNotModified(webRequest) || getResponseStatus() != null || mavContainer.isRequestHandled()) {
 				disableContentCachingIfNecessary(webRequest);
@@ -118,9 +122,11 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 			return;
 		}
 
+		// 请求是否已经处理完成 false / true 没有返回完成
 		mavContainer.setRequestHandled(false);
 		Assert.state(this.returnValueHandlers != null, "No return value handlers");
 		try {
+			// 返回值处理
 			this.returnValueHandlers.handleReturnValue(
 					returnValue, getReturnValueType(returnValue), mavContainer, webRequest);
 		}
@@ -136,11 +142,13 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 	 * Set the response status according to the {@link ResponseStatus} annotation.
 	 */
 	private void setResponseStatus(ServletWebRequest webRequest) throws IOException {
+		// 获取状态码
 		HttpStatus status = getResponseStatus();
 		if (status == null) {
 			return;
 		}
 
+		// 设置相应的状态码
 		HttpServletResponse response = webRequest.getResponse();
 		if (response != null) {
 			String reason = getResponseStatusReason();

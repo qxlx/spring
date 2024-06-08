@@ -46,3 +46,28 @@ factoryBean只需要调用getObject()返回具体的对象，整个对象的创�
 14.advisor: 通知器包含advice和pointcut
   advice: 具体的某一个消息通知
   adviced: 配置代理,proxyFactory
+
+
+
+15.设计模式总结
+职责链: AOP执行的时候
+工厂模式: 
+
+
+
+16.spring
+1.准备spring容器
+2.准备mvc容器 初始化9大组件
+3.如何处理一个请求
+
+常用注解 mvc
+reuqestBody
+requestMapping
+requestParam
+PathVariables
+vaildated
+valid
+cookieValue
+sessionAttribute
+modelAttribute
+requestHeader

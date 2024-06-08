@@ -787,6 +787,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			HttpServletResponse response, HandlerMethod handlerMethod) throws Exception {
 
 		ModelAndView mav;
+		// 校验请求 httpMethod 和 session的校验
 		checkRequest(request);
 
 		// 会话锁，每一个用户和服务器交互无论发了多少请求都只有一个会话，限制用户的线程 Execute invokeHandlerMethod in synchronized block if required.
@@ -804,10 +805,13 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			}
 		}
 		else {
-			//执行目标方法 No synchronization on session demanded at all...
+			// 执行目标方法 No synchronization on session demanded at all...
+			// 核心 ⭐️ modelAndView
 			mav = invokeHandlerMethod(request, response, handlerMethod);
 		}
 
+		// head_cache_control 头
+		// 使用场景:
 		if (!response.containsHeader(HEADER_CACHE_CONTROL)) {
 			if (getSessionAttributesHandler(handlerMethod).hasSessionAttributes()) {
 				applyCacheSeconds(response, this.cacheSecondsForSessionAttributeHandlers);
@@ -852,20 +856,26 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			HttpServletResponse response, HandlerMethod handlerMethod) throws Exception {
 		//把原生的request，response封装到一个对象中方便后续只用这一个参数就行【装饰器模式】
 		ServletWebRequest webRequest = new ServletWebRequest(request, response);
-		try { //数据绑定器
+		try {
+			//数据绑定器
 			WebDataBinderFactory binderFactory = getDataBinderFactory(handlerMethod);
 			ModelFactory modelFactory = getModelFactory(handlerMethod, binderFactory);
 			//获取到模型工厂 Model（要交给页面的数据） View（我们要去的 视图）
+			//创建对象 调用请求
 			ServletInvocableHandlerMethod invocableMethod = createInvocableHandlerMethod(handlerMethod);
+			// afterPropertiesSet 的时候加载
 			if (this.argumentResolvers != null) { //参数解析器
 				invocableMethod.setHandlerMethodArgumentResolvers(this.argumentResolvers);
 			}
 			if (this.returnValueHandlers != null) { //返回值解析器
 				invocableMethod.setHandlerMethodReturnValueHandlers(this.returnValueHandlers);
 			}
+			// 绑定工厂对象
 			invocableMethod.setDataBinderFactory(binderFactory);
+
 			invocableMethod.setParameterNameDiscoverer(this.parameterNameDiscoverer);
 			//以上的 几个核心组件都挺重要的  ModelAndViewContainer以后流程共享ModelAndView数据的临时存储容器
+
 			ModelAndViewContainer mavContainer = new ModelAndViewContainer();
 			mavContainer.addAllAttributes(RequestContextUtils.getInputFlashMap(request));
 			modelFactory.initModel(webRequest, mavContainer, invocableMethod);

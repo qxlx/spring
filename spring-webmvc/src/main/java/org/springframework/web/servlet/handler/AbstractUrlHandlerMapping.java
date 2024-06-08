@@ -142,10 +142,12 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 	@Override
 	@Nullable
 	protected Object getHandlerInternal(HttpServletRequest request) throws Exception {
+		// 请求路径
 		String lookupPath = initLookupPath(request);
 		Object handler;
 		if (usesPathPatterns()) {
 			RequestPath path = ServletRequestPathUtils.getParsedRequestPath(request);
+			// 请求路径对应的
 			handler = lookupHandler(path, lookupPath, request);
 		}
 		else {
@@ -155,12 +157,15 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 			// We need to care for the default handler directly, since we need to
 			// expose the PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE for it as well.
 			Object rawHandler = null;
+			// 跟路径
 			if (StringUtils.matchesCharacter(lookupPath, '/')) {
 				rawHandler = getRootHandler();
 			}
+			// 默认处理器
 			if (rawHandler == null) {
 				rawHandler = getDefaultHandler();
 			}
+
 			if (rawHandler != null) {
 				// Bean name or resolved handler?
 				if (rawHandler instanceof String) {
@@ -194,6 +199,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 
 		// Pattern match?
 		List<PathPattern> matches = null;
+		// 前置 pathPatternHandlerMap 会添加
 		for (PathPattern pattern : this.pathPatternHandlerMap.keySet()) {
 			if (pattern.matches(path.pathWithinApplication())) {
 				matches = (matches != null ? matches : new ArrayList<>());
@@ -412,6 +418,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 		Assert.notNull(handler, "Handler object must not be null");
 		Object resolvedHandler = handler;
 
+		// 从容器中获取对象
 		// Eagerly resolve handler if referencing singleton via name.
 		if (!this.lazyInitHandlers && handler instanceof String) {
 			String handlerName = (String) handler;
@@ -421,6 +428,7 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 			}
 		}
 
+		// 根据请求路径
 		Object mappedHandler = this.handlerMap.get(urlPath);
 		if (mappedHandler != null) {
 			if (mappedHandler != resolvedHandler) {
@@ -430,19 +438,25 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 			}
 		}
 		else {
+			// 是否跟路径
 			if (urlPath.equals("/")) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("Root mapping to " + getHandlerDescription(handler));
 				}
+				// rootHandler
 				setRootHandler(resolvedHandler);
 			}
+			//默认处理器
 			else if (urlPath.equals("/*")) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("Default mapping to " + getHandlerDescription(handler));
 				}
 				setDefaultHandler(resolvedHandler);
 			}
+			//
 			else {
+				// 路径绑定关系 ⭐️
+				// test01  当前对象
 				this.handlerMap.put(urlPath, resolvedHandler); //当前beanName以/开始作为urlPath，当前bean信息作为handler注册进去
 				if (getPatternParser() != null) {
 					this.pathPatternHandlerMap.put(getPatternParser().parse(urlPath), resolvedHandler);

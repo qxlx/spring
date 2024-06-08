@@ -143,6 +143,7 @@ public class ExceptionHandlerMethodResolver {
 	 */
 	@Nullable
 	public Method resolveMethodByThrowable(Throwable exception) {
+		// 核心 ⭐️
 		Method method = resolveMethodByExceptionType(exception.getClass());
 		if (method == null) {
 			Throwable cause = exception.getCause();

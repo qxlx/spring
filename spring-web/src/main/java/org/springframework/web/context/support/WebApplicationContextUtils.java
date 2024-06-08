@@ -91,6 +91,7 @@ public abstract class WebApplicationContextUtils {
 	 */
 	@Nullable
 	public static WebApplicationContext getWebApplicationContext(ServletContext sc) {
+		// IOC容器
 		return getWebApplicationContext(sc, WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 	}
 

@@ -138,10 +138,13 @@ public class InvocableHandlerMethod extends HandlerMethod {
 		if (logger.isTraceEnabled()) {
 			logger.trace("Arguments: " + Arrays.toString(args));
 		}
+		// 具体调用method
 		return doInvoke(args); //就是反射执行
 	}
 
 	/**
+	 * 1.是否支持
+	 * 2.解析
 	 * Get the method argument values for the current request, checking the provided
 	 * argument values and falling back to the configured argument resolvers.
 	 * <p>The resulting array will be passed into {@link #doInvoke}.
@@ -158,15 +161,18 @@ public class InvocableHandlerMethod extends HandlerMethod {
 		Object[] args = new Object[parameters.length];
 		for (int i = 0; i < parameters.length; i++) {
 			MethodParameter parameter = parameters[i];
+			// 给paramter 参数解析器
 			parameter.initParameterNameDiscovery(this.parameterNameDiscoverer);
 			args[i] = findProvidedArgument(parameter, providedArgs); //先去已提供的参数中找
 			if (args[i] != null) {
 				continue;
 			}
-			if (!this.resolvers.supportsParameter(parameter)) { //支持这种参数的解析器也会被放到缓存，下一次进来，就不用27个人挨个判断
+			// 支持这种参数的解析器也会被放到缓存，下一次进来，就不用27个人挨个判断
+			if (!this.resolvers.supportsParameter(parameter)) {
 				throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver"));
 			}
 			try {
+				// 获取不同参数的解析器
 				args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory);
 			}
 			catch (Exception ex) {

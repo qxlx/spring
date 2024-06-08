@@ -198,6 +198,7 @@ public abstract class AbstractRefreshableWebApplicationContext extends AbstractR
 	 */
 	@Override
 	protected void onRefresh() {
+		// 初始化主题资源
 		this.themeSource = UiApplicationContextUtils.initThemeSource(this);
 	}
 

@@ -137,7 +137,9 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 			HttpServletRequest request, HttpServletResponse response, @Nullable Object handler, Exception ex) {
 
 		if (shouldApplyTo(request, handler)) {
+			// 阻塞缓存
 			prepareResponse(ex, response);
+			// 执行解析异常 返回modelAndView对象
 			ModelAndView result = doResolveException(request, response, handler, ex); //留给子类的模板方法
 			if (result != null) {
 				// Print debug message when warn logger is not enabled.
@@ -169,6 +171,7 @@ public abstract class AbstractHandlerExceptionResolver implements HandlerExcepti
 	 */
 	protected boolean shouldApplyTo(HttpServletRequest request, @Nullable Object handler) {
 		if (handler != null) {
+			// 如果handler不为空 并且包含
 			if (this.mappedHandlers != null && this.mappedHandlers.contains(handler)) {
 				return true;
 			}

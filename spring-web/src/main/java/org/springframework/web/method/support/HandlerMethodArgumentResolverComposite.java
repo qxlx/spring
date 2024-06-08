@@ -127,6 +127,7 @@ public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgu
 	 */
 	@Nullable
 	private HandlerMethodArgumentResolver getArgumentResolver(MethodParameter parameter) {
+		// 存储到cache中
 		HandlerMethodArgumentResolver result = this.argumentResolverCache.get(parameter); //先看缓存中有没有
 		if (result == null) {
 			for (HandlerMethodArgumentResolver resolver : this.argumentResolvers) {

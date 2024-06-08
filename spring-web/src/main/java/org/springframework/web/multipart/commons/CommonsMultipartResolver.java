@@ -120,19 +120,23 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 	}
 
 
+	// 是否文件上传
 	@Override
 	public boolean isMultipart(HttpServletRequest request) {
 		return ServletFileUpload.isMultipartContent(request);
 	}
 
+	// 解析文件内容
 	@Override
 	public MultipartHttpServletRequest resolveMultipart(final HttpServletRequest request) throws MultipartException {
 		Assert.notNull(request, "Request must not be null");
+		// 是否懒加载
 		if (this.resolveLazily) {
 			return new DefaultMultipartHttpServletRequest(request) {
 				@Override
 				protected void initializeMultipart() {
 					MultipartParsingResult parsingResult = parseRequest(request);
+					// 文件上传file 对象
 					setMultipartFiles(parsingResult.getMultipartFiles());
 					setMultipartParameters(parsingResult.getMultipartParameters());
 					setMultipartParameterContentTypes(parsingResult.getMultipartParameterContentTypes());
@@ -140,6 +144,9 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 			};
 		}
 		else {
+			// 是否先调用parseRequest() 方法
+			// 1.解析具体的参数
+			// 2.普通类型 和 文件类型 存入到集合 组装成 MultipartParsingResult 对象
 			MultipartParsingResult parsingResult = parseRequest(request);
 			return new DefaultMultipartHttpServletRequest(request, parsingResult.getMultipartFiles(),
 					parsingResult.getMultipartParameters(), parsingResult.getMultipartParameterContentTypes());
@@ -153,9 +160,13 @@ public class CommonsMultipartResolver extends CommonsFileUploadSupport
 	 * @throws MultipartException if multipart resolution failed.
 	 */
 	protected MultipartParsingResult parseRequest(HttpServletRequest request) throws MultipartException {
+		// 请求的编码格式 utf-8
 		String encoding = determineEncoding(request);
+		//
 		FileUpload fileUpload = prepareFileUpload(encoding);
 		try {
+			// 对请求中multipart文件进行具体的处理
+			// 多个文件处理
 			List<FileItem> fileItems = ((ServletFileUpload) fileUpload).parseRequest(request);
 			return parseFileItems(fileItems, encoding);
 		}

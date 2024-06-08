@@ -49,11 +49,13 @@ import org.springframework.web.bind.support.SimpleSessionStatus;
  */
 public class ModelAndViewContainer {
 
+	// 忽略默认模型
 	private boolean ignoreDefaultModelOnRedirect = false;
 
 	@Nullable
 	private Object view;
 
+	// 默认model对象
 	private final ModelMap defaultModel = new BindingAwareModelMap();
 
 	@Nullable

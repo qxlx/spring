@@ -247,12 +247,15 @@ public abstract class CommonsFileUploadSupport {
 	 * @see CommonsMultipartFile#CommonsMultipartFile(org.apache.commons.fileupload.FileItem)
 	 */
 	protected MultipartParsingResult parseFileItems(List<FileItem> fileItems, String encoding) {
+		// 保存上传的文件
 		MultiValueMap<String, MultipartFile> multipartFiles = new LinkedMultiValueMap<>();
 		Map<String, String[]> multipartParameters = new HashMap<>();
 		Map<String, String> multipartParameterContentTypes = new HashMap<>();
 
+		// 遍历
 		// Extract multipart files and multipart parameters.
 		for (FileItem fileItem : fileItems) {
+			// 参数类型
 			if (fileItem.isFormField()) {
 				String value;
 				String partEncoding = determineEncoding(fileItem.getContentType(), encoding);
@@ -269,9 +272,11 @@ public abstract class CommonsFileUploadSupport {
 				String[] curParam = multipartParameters.get(fileItem.getFieldName());
 				if (curParam == null) {
 					// simple form field
+					// 单个参数
 					multipartParameters.put(fileItem.getFieldName(), new String[] {value});
 				}
 				else {
+					// 数组参数
 					// array of simple form fields
 					String[] newParam = StringUtils.addStringToArray(curParam, value);
 					multipartParameters.put(fileItem.getFieldName(), newParam);
@@ -279,6 +284,7 @@ public abstract class CommonsFileUploadSupport {
 				multipartParameterContentTypes.put(fileItem.getFieldName(), fileItem.getContentType());
 			}
 			else {
+				// 文件类型处理
 				// multipart file field
 				CommonsMultipartFile file = createMultipartFile(fileItem);
 				multipartFiles.add(file.getName(), file);

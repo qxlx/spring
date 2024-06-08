@@ -408,6 +408,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Decorate event as an ApplicationEvent if necessary
 		ApplicationEvent applicationEvent;
+		// 是否 ApplicationEvent
 		if (event instanceof ApplicationEvent) { // ApplicationEvent接口下的时间
 			applicationEvent = (ApplicationEvent) event;
 		}
@@ -424,6 +425,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 		else {
 			//拿到多播器发送事件即可
+			// 事件广播 ⭐️
 			getApplicationEventMulticaster().multicastEvent(applicationEvent, eventType);
 		}
 
@@ -982,7 +984,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		getLifecycleProcessor().onRefresh();
 
 		//发布事件 Publish the final event.
-		publishEvent(new ContextRefreshedEvent(this)); //发布上下文环境刷新完成的事件
+		//发布上下文环境刷新完成的事件 核心点⭐️
+		publishEvent(new ContextRefreshedEvent(this));
 
 		//jconsole（暴露MBean端点信息） Participate in LiveBeansView MBean, if active.
 		if (!NativeDetector.inNativeImage()) {
