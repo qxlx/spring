@@ -55,6 +55,9 @@ import org.springframework.lang.Nullable;
  * @see HierarchicalBeanFactory
  * @see BeanFactoryUtils
  */
+// 获取相关的配置信息
+	// continaBeanDefinition
+	// getBaenNameForType
 public interface ListableBeanFactory extends BeanFactory {
 
 	/**

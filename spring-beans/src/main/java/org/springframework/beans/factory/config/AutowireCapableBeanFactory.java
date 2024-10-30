@@ -59,6 +59,8 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.beans.factory.config.ConfigurableListableBeanFactory
  * @see org.springframework.context.ApplicationContext#getAutowireCapableBeanFactory()
  */
+// 具备自动注入的能力
+	// initintialBean DisposeBean
 public interface AutowireCapableBeanFactory extends BeanFactory {
 
 	/**

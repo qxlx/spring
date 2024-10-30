@@ -122,7 +122,9 @@ abstract class ConfigurationClassUtils {
 				return false;
 			}
 		}
-		// 是否 Configuration
+		// 是否 @Configuration 注解
+		// 该方法还会判断该注解上的注解是否有@Configuration，一直往上寻找
+		// 因为有的注解为复合注解
 		Map<String, Object> config = metadata.getAnnotationAttributes(Configuration.class.getName());
 		if (config != null && !Boolean.FALSE.equals(config.get("proxyBeanMethods"))) {
 			// 设置属性值
@@ -159,6 +161,7 @@ abstract class ConfigurationClassUtils {
 		}
 
 		// Any of the typical annotations found?
+		// 是这四个注解
 		for (String indicator : candidateIndicators) {
 			if (metadata.isAnnotated(indicator)) {
 				return true;

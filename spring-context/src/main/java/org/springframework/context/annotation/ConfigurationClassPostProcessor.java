@@ -237,6 +237,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	 */
 	@Override //把配置类中所有bean的定义信息导入进来。
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
+		// 生产唯一的标识,用于重复处理验证
 		int registryId = System.identityHashCode(registry);
 		if (this.registriesPostProcessed.contains(registryId)) {
 			throw new IllegalStateException(
@@ -248,6 +249,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		}
 		this.registriesPostProcessed.add(registryId);
 
+		// 解析java配置bean
 		processConfigBeanDefinitions(registry); //处理配置的BeanDefinition信息
 	}
 
@@ -284,6 +286,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		List<BeanDefinitionHolder> configCandidates = new ArrayList<>();
 		String[] candidateNames = registry.getBeanDefinitionNames(); //拿到工厂所有的bean定义信息
 
+		// 遍历执行
 		for (String beanName : candidateNames) {
 			BeanDefinition beanDef = registry.getBeanDefinition(beanName);
 			if (beanDef.getAttribute(ConfigurationClassUtils.CONFIGURATION_CLASS_ATTRIBUTE) != null) {
@@ -291,6 +294,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 					logger.debug("Bean definition has already been processed as a configuration class: " + beanDef);
 				}
 			}
+			// 如果当前的bean是javaBean配置类,@configuration注解的类
 			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) {
 				configCandidates.add(new BeanDefinitionHolder(beanDef, beanName)); //将配置类加到候选集合里面，等待处理
 			}
@@ -338,11 +342,12 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		// 已经解析过的配置类
 		Set<ConfigurationClass> alreadyParsed = new HashSet<>(configCandidates.size());
 		do {
-			// 解析
+			// 2.解析
 			StartupStep processConfig = this.applicationStartup.start("spring.context.config-classes.parse");
 			parser.parse(candidates); //解析配置类;所有需要扫描进来的组件的BeanDefinition信息都已经完成
 			parser.validate();
 
+			// 排除已经处理过的类
 			Set<ConfigurationClass> configClasses = new LinkedHashSet<>(parser.getConfigurationClasses());
 			configClasses.removeAll(alreadyParsed);
 			//每一个组件都可以当配置类，@Import之类都能进行处理
@@ -352,6 +357,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 						registry, this.sourceExtractor, this.resourceLoader, this.environment,
 						this.importBeanNameGenerator, parser.getImportRegistry());
 			}
+			// 3.加载bean定义信息,主要实现将 @bean @Configuration @Import @ImportResource @ImportRegistrar注册为bean
 			this.reader.loadBeanDefinitions(configClasses);
 			alreadyParsed.addAll(configClasses);
 			processConfig.tag("classCount", () -> String.valueOf(configClasses.size())).end();

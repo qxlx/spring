@@ -231,6 +231,7 @@ class ConfigurationClassParser {
 			return;
 		}
 		//Spring底层大量使用缓存来保证框架速度
+		// 是否需要解析
 		ConfigurationClass existingClass = this.configurationClasses.get(configClass);
 		if (existingClass != null) {
 			if (configClass.isImported()) {
@@ -254,6 +255,7 @@ class ConfigurationClassParser {
 		SourceClass sourceClass = asSourceClass(configClass, filter);
 		do {
 			//解析配置类里面的所有注解，
+			// 【真正解析配置类】
 			sourceClass = doProcessConfigurationClass(configClass, sourceClass, filter);
 		}
 		while (sourceClass != null);
@@ -280,6 +282,7 @@ class ConfigurationClassParser {
 			throws IOException {
 
 		// 是否包含 component 注解
+		// 递归处理任何成员嵌套类
 		if (configClass.getMetadata().isAnnotated(Component.class.getName())) {
 			// Recursively process any member (nested) classes first
 			// 注解内部类
@@ -287,7 +290,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @PropertySource annotations
-		// 属性值
+		// 属性值 处理@PropertySource注解
 		for (AnnotationAttributes propertySource : AnnotationConfigUtils.attributesForRepeatable(
 				sourceClass.getMetadata(), PropertySources.class,
 				org.springframework.context.annotation.PropertySource.class)) {
@@ -302,6 +305,7 @@ class ConfigurationClassParser {
 
 		// Process any @ComponentScan annotations
 		// ComponentScans ComponentScans
+		// 处理#@ComponentScan
 		Set<AnnotationAttributes> componentScans = AnnotationConfigUtils.attributesForRepeatable(
 				sourceClass.getMetadata(), ComponentScans.class, ComponentScans.class);
 		if (!componentScans.isEmpty() &&
@@ -324,10 +328,12 @@ class ConfigurationClassParser {
 			}
 		}
 
-		//处理@Import注解的地方【AOP就是利用这个地方导入一个后置处理器的】 Process any @Import annotations
+		//处理@Import注解的地方
+		// 【AOP就是利用这个地方导入一个后置处理器的】 Process any @Import annotations
 		processImports(configClass, sourceClass, getImports(sourceClass), filter, true);
 
-		//处理@ImportResource  Process any @ImportResource annotations
+		//处理@ImportResource
+		// Process any @ImportResource annotations
 		AnnotationAttributes importResource =
 				AnnotationConfigUtils.attributesFor(sourceClass.getMetadata(), ImportResource.class);
 		if (importResource != null) {
@@ -339,7 +345,8 @@ class ConfigurationClassParser {
 			}
 		}
 
-		//处理@Bean Process individual @Bean methods
+		//处理@Bean
+		// Process individual @Bean methods
 		Set<MethodMetadata> beanMethods = retrieveBeanMethodMetadata(sourceClass);
 		for (MethodMetadata methodMetadata : beanMethods) {
 			configClass.addBeanMethod(new BeanMethod(methodMetadata, configClass));
@@ -420,7 +427,9 @@ class ConfigurationClassParser {
 	 */
 	private Set<MethodMetadata> retrieveBeanMethodMetadata(SourceClass sourceClass) {
 		AnnotationMetadata original = sourceClass.getMetadata();
+		// 获取所有@Bean注解的方法
 		Set<MethodMetadata> beanMethods = original.getAnnotatedMethods(Bean.class.getName());
+		// 如果配置类有多个@Bean注解的方法 则排序
 		if (beanMethods.size() > 1 && original instanceof StandardAnnotationMetadata) {
 			// Try reading the class file via ASM for deterministic declaration order...
 			// Unfortunately, the JVM's standard reflection returns methods in arbitrary
