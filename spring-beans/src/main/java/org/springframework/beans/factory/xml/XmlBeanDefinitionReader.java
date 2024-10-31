@@ -330,12 +330,14 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 					"Detected cyclic loading of " + encodedResource + " - check your import definitions!");
 		}
 
+		// 获取配置文件的输入流
 		try (InputStream inputStream = encodedResource.getResource().getInputStream()) {
+			// XML解析类 文件转换成XML
 			InputSource inputSource = new InputSource(inputStream);
 			if (encodedResource.getEncoding() != null) {
 				inputSource.setEncoding(encodedResource.getEncoding());
 			}
-			// 逻辑处理的核心逻辑
+			// 逻辑处理的核心逻辑  1.配置文件 2.解析类
 			return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
 		}
 		catch (IOException ex) {
@@ -388,8 +390,10 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource)
 			throws BeanDefinitionStoreException {
 
-		try {// 字符串转换成 ducument string[] - string resource[] resoucre 封装成一个document对象，疯长成一个beanDeftion对象
-			Document doc = doLoadDocument(inputSource, resource); //利用dom解析工具把xml变成Document
+		try {
+			// 字符串转换成 ducument string[] - string resource[] resoucre 封装成一个document对象，疯长成一个beanDeftion对象
+			Document doc = doLoadDocument(inputSource, resource);
+			//利用dom解析工具把xml变成Document
 			int count = registerBeanDefinitions(doc, resource);
 			if (logger.isDebugEnabled()) {
 				logger.debug("Loaded " + count + " bean definitions from " + resource);
@@ -509,7 +513,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	// 解析标签元素且完成注册功能
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
-		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader(); // 对XML的beanDefation解析
+		// 对XML的beanDefation解析
+		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
 		int countBefore = getRegistry().getBeanDefinitionCount();
 		// 完成具体的解析过程
 		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));

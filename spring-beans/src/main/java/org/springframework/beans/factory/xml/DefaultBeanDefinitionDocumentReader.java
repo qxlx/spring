@@ -177,11 +177,11 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 					Element ele = (Element) node;
 					// bean 标签 使用默认标签进行解析
 					if (delegate.isDefaultNamespace(ele)) { //遍历文档中的所有节点
-						// 解析具体的标签
+						// 解析具体的标签 基本标签
 						parseDefaultElement(ele, delegate);
 					}
 					else {
-						// AOP 标签
+						// 自定义标签: AOP 标签
 						delegate.parseCustomElement(ele);
 					}
 				}
@@ -193,15 +193,20 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	}
 
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
+		// import
 		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
 			importBeanDefinitionResource(ele);
 		}
+		// alias
 		else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
 			processAliasRegistration(ele);
 		}
+		// bean
 		else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
+			// 对bean标签的解析
 			processBeanDefinition(ele, delegate);
 		}
+		//
 		else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
 			// recurse
 			doRegisterBeanDefinitions(ele);
@@ -309,9 +314,10 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * and registering it with the registry.
 	 */
 	protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
-		BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); //把当前标签解析完了，BeanDefinition和beanName都封装在了Holder中
+		//把当前标签解析完了，BeanDefinition和beanName都封装在了Holder中
+		BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
 		if (bdHolder != null) {
-			// 装饰
+			// 装饰 bean包含自定义标签
 			bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
 			try {
 				// 向IOC容器注册
@@ -322,7 +328,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				getReaderContext().error("Failed to register bean definition with name '" +
 						bdHolder.getBeanName() + "'", ele, ex);
 			}
-			// Send registration event.  //发送一个通知事件
+			// Send registration event.  //发送一个通知事件 拓展点
 			getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdHolder));
 		}
 	}
