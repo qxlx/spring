@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'junit:junit:4.13.1'
     compile(project(":spring-context"))
     compile(project(":spring-aspects"))  //引入aop&切面模块
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
