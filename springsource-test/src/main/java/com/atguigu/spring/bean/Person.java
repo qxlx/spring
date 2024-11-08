@@ -63,7 +63,7 @@ public class Person implements ApplicationContextAware, MessageSourceAware {
 
 
 	//
-//	@Lookup  //去容器中找。@Bean的这种方式注册的Person @Lookup不生效
+	@Lookup  //去容器中找。@Bean的这种方式注册的Person @Lookup不生效
 	public Cat getCat() {
 		return cat;
 	}

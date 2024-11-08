@@ -12,6 +12,7 @@ public class SpringApplication {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext ioc =
 				new AnnotationConfigApplicationContext(AppConfig.class);
+		ioc.getBean()
 	}
 
 }
